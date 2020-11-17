@@ -3,6 +3,7 @@ import { Lesson } from './lesson.entity';
 import { CreateLessonInput } from './create-lesson.input';
 import { LessonService } from './lesson.service';
 import { LessonType } from './lesson.type';
+import { AssignStudentsInput } from './assign-students.input';
 
 @Resolver((_of) => LessonType)
 export class LessonResolver {
@@ -23,5 +24,12 @@ export class LessonResolver {
     @Args('lesson') lessonInput: CreateLessonInput,
   ): Promise<Lesson> {
     return this.lessonService.createLesson(lessonInput);
+  }
+
+  @Mutation((_returns) => LessonType)
+  assignStudents(
+    @Args('assignStudents') assignInput: AssignStudentsInput,
+  ): Promise<Lesson> {
+    return this.lessonService.assignStudents(assignInput);
   }
 }
